@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 
 # Step 1: Load grayscale image
@@ -41,15 +40,20 @@ def idft_reconstruct(filtered):
 img_lpf = idft_reconstruct(lpf)
 img_hpf = idft_reconstruct(hpf)
 
-# Step 8: Save outputs separately
+# Step 8: Normalize + Save outputs separately
+def normalize_and_save(img_array, filename):
+    norm_img = cv2.normalize(img_array, None, 0, 255, cv2.NORM_MINMAX)
+    norm_img = np.uint8(norm_img)
+    cv2.imwrite(filename, norm_img)
+
 os.makedirs("outputs", exist_ok=True)
 
-cv2.imwrite("outputs/original.png", img)
-cv2.imwrite("outputs/magnitude_spectrum.png", magnitude_spectrum)
-cv2.imwrite("outputs/lpf.png", img_lpf)
-cv2.imwrite("outputs/hpf.png", img_hpf)
+normalize_and_save(img, "outputs/original.png")
+normalize_and_save(magnitude_spectrum, "outputs/magnitude_spectrum.png")
+normalize_and_save(img_lpf, "outputs/lpf.png")
+normalize_and_save(img_hpf, "outputs/hpf.png")
 
-print("✅ Separate image files saved in outputs/ folder:")
+print("✅ Normalized images saved in outputs/ folder:")
 print(" - original.png")
 print(" - magnitude_spectrum.png")
 print(" - lpf.png")
