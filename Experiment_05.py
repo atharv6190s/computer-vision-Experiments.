@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from skimage.feature import hog
 from skimage import exposure
 
-IMAGE_PATH = "/workspaces/computer-vision-Experiments./download.jpg"
+IMAGE_PATH = "/workspaces/computer-vision-Experiments./EXPERIMENT_05 _IMAGE.jpg"
 OUTPUT_DIR = "output"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
